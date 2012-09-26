@@ -11,8 +11,9 @@ module OAuth
 
       # Search for possible superclass matches.
       if klass.nil?
-        request_parent = available_proxies.keys.find { |rc| request.kind_of?(rc) }
-        klass = available_proxies[request_parent]
+        #When searching for possible superclass match - we should take the most specific superclass
+        #e.g. take the proxy for ActionDispatch::Request even when a proxy for Rack::Request is also available
+        klass = request.class.ancestors.map{|ancestor_klass| available_proxies[ancestor_klass]}.compact.first
       end
 
       raise UnknownRequestType, request.class.to_s unless klass
