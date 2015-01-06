@@ -1,3 +1,5 @@
+<b>NOTE: THIS REPO HAS BEEN DEPRECATED</b>
+
 = Ruby OAuth
 
 == What
